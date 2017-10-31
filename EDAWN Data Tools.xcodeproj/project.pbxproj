@@ -11,9 +11,13 @@
 		A19622AD1FA678C00042382B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19622AC1FA678C00042382B /* ViewController.swift */; };
 		A19622AF1FA678C00042382B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A19622AE1FA678C00042382B /* Assets.xcassets */; };
 		A19622B21FA678C00042382B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19622B01FA678C00042382B /* Main.storyboard */; };
+		EFB4ABF1C80220264266A222 /* Pods_EDAWN_Data_Tools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C99E5FAB2C607F060F2524 /* Pods_EDAWN_Data_Tools.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F38E8CB288D10ADA22E19D8 /* Pods-EDAWN Data Tools.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EDAWN Data Tools.release.xcconfig"; path = "Pods/Target Support Files/Pods-EDAWN Data Tools/Pods-EDAWN Data Tools.release.xcconfig"; sourceTree = "<group>"; };
+		79C99E5FAB2C607F060F2524 /* Pods_EDAWN_Data_Tools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EDAWN_Data_Tools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83375AD28186433A1A48905F /* Pods-EDAWN Data Tools.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EDAWN Data Tools.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EDAWN Data Tools/Pods-EDAWN Data Tools.debug.xcconfig"; sourceTree = "<group>"; };
 		A19622A71FA678C00042382B /* EDAWN Data Tools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EDAWN Data Tools.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A19622AA1FA678C00042382B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A19622AC1FA678C00042382B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,17 +32,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFB4ABF1C80220264266A222 /* Pods_EDAWN_Data_Tools.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35A45DC26409AAE9A67C3A7C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				79C99E5FAB2C607F060F2524 /* Pods_EDAWN_Data_Tools.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97B899F0F61DAE15620C9085 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				83375AD28186433A1A48905F /* Pods-EDAWN Data Tools.debug.xcconfig */,
+				0F38E8CB288D10ADA22E19D8 /* Pods-EDAWN Data Tools.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A196229E1FA678C00042382B = {
 			isa = PBXGroup;
 			children = (
 				A19622A91FA678C00042382B /* EDAWN Data Tools */,
 				A19622A81FA678C00042382B /* Products */,
+				97B899F0F61DAE15620C9085 /* Pods */,
+				35A45DC26409AAE9A67C3A7C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,9 +94,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A19622B71FA678C00042382B /* Build configuration list for PBXNativeTarget "EDAWN Data Tools" */;
 			buildPhases = (
+				716FA4665C2F4B8A7A9C7C41 /* [CP] Check Pods Manifest.lock */,
 				A19622A31FA678C00042382B /* Sources */,
 				A19622A41FA678C00042382B /* Frameworks */,
 				A19622A51FA678C00042382B /* Resources */,
+				972050CE4B9E1C4B873480F2 /* [CP] Embed Pods Frameworks */,
+				1B35ACC0B07E7CE7F6475866 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,6 +155,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B35ACC0B07E7CE7F6475866 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EDAWN Data Tools/Pods-EDAWN Data Tools-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		716FA4665C2F4B8A7A9C7C41 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EDAWN Data Tools-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		972050CE4B9E1C4B873480F2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-EDAWN Data Tools/Pods-EDAWN Data Tools-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CSV.swift/CSV.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CSV.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EDAWN Data Tools/Pods-EDAWN Data Tools-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A19622A31FA678C00042382B /* Sources */ = {
@@ -261,6 +342,7 @@
 		};
 		A19622B81FA678C00042382B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83375AD28186433A1A48905F /* Pods-EDAWN Data Tools.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "EDAWN Data Tools/EDAWN_Data_Tools.entitlements";
@@ -277,6 +359,7 @@
 		};
 		A19622B91FA678C00042382B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F38E8CB288D10ADA22E19D8 /* Pods-EDAWN Data Tools.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "EDAWN Data Tools/EDAWN_Data_Tools.entitlements";
