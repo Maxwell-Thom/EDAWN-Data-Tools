@@ -8,10 +8,14 @@
 
 import Cocoa
 import CSV
+import SwiftyJSON
+import Alamofire
 
 class ViewController: NSViewController {
    @IBOutlet weak var inputFileNameField: NSTextField!
    @IBOutlet weak var outputFileNameField: NSTextField!
+
+   var titles = ["coo", "ceo", "founder", "cfo"]
 
    override func viewDidLoad() {
       super.viewDidLoad()
@@ -78,12 +82,12 @@ class ViewController: NSViewController {
          try? outputCSV.write(row: inputCSV.currentRow!)
       }
       outputCSV.stream.close()
-
+      requestOrganization(domain: "facebook.com")
    }
 
    func browseFile(textField: NSTextField, isOutput: Bool) {
       let dialog = NSOpenPanel()
-      dialog.title                   = "Choose a .txt file"
+      dialog.title                   = "Choose a .csv file"
       dialog.showsResizeIndicator    = true
       dialog.showsHiddenFiles        = false
       dialog.canChooseDirectories    = isOutput
@@ -104,4 +108,48 @@ class ViewController: NSViewController {
          return
       }
    }
+
+   func requestOrganization(domain: String) {
+      Alamofire.request("https://api.crunchbase.com/v3.1/odm-organizations?domain_name=\(domain)&user_key=a03227a012cd7b8a686f58745bd98a0d").responseJSON { response in
+         switch response.result {
+         case .success:
+            if let data = response.data {
+               let json = JSON(data: data)
+               if let name = json["data"]["items"][0]["properties"]["name"].string {
+                  self.requestPeople(companyName: name)
+               }
+            }
+         case .failure(let error):
+            print(error)
+         }
+      }
+   }
+
+   func requestPeople(companyName: String) {
+      var chiefs = [String:String]()
+      Alamofire.request("https://api.crunchbase.com/v3.1/odm-people?query=\(companyName)&user_key=a03227a012cd7b8a686f58745bd98a0d").responseJSON { response in
+         switch response.result {
+         case .success:
+            if let data = response.data {
+               let json = JSON(data: data)
+               for item in json["data"]["items"] {
+                  for title in self.titles {
+                     if item.1["properties"]["title"].string?.lowercased().range(of:title) != nil {
+                        if item.1["properties"]["organization_name"].string?.description == companyName.description {
+                           if let first = item.1["properties"]["first_name"].string, let last = item.1["properties"]["last_name"].string {
+                              chiefs["\(first) \(last)"] = "\(item.1["properties"]["title"])"
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         case .failure(let error):
+            //return "\(domain): \(error.localizedDescription)"
+            print(error)
+         }
+         print(chiefs)
+      }
+   }
 }
+

@@ -7,5 +7,7 @@ target 'EDAWN Data Tools' do
 
   # Pods for EDAWN Data Tools
 	pod 'CSV.swift', '~> 2.1.0'
+	pod 'Alamofire', '~> 4.5'
+        pod 'SwiftyJSON'
 
 end
