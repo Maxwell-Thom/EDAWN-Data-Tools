@@ -11,6 +11,7 @@
 		A19622AD1FA678C00042382B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19622AC1FA678C00042382B /* ViewController.swift */; };
 		A19622AF1FA678C00042382B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A19622AE1FA678C00042382B /* Assets.xcassets */; };
 		A19622B21FA678C00042382B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19622B01FA678C00042382B /* Main.storyboard */; };
+		A1C3C64B20087A29001B74C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C3C64A20087A29001B74C6 /* Constants.swift */; };
 		EFB4ABF1C80220264266A222 /* Pods_EDAWN_Data_Tools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79C99E5FAB2C607F060F2524 /* Pods_EDAWN_Data_Tools.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		A19622B11FA678C00042382B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A19622B31FA678C00042382B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A19622B41FA678C00042382B /* EDAWN_Data_Tools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EDAWN_Data_Tools.entitlements; sourceTree = "<group>"; };
+		A1C3C64A20087A29001B74C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				A19622B01FA678C00042382B /* Main.storyboard */,
 				A19622B31FA678C00042382B /* Info.plist */,
 				A19622B41FA678C00042382B /* EDAWN_Data_Tools.entitlements */,
+				A1C3C64A20087A29001B74C6 /* Constants.swift */,
 			);
 			path = "EDAWN Data Tools";
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			files = (
 				A19622AD1FA678C00042382B /* ViewController.swift in Sources */,
 				A19622AB1FA678C00042382B /* AppDelegate.swift in Sources */,
+				A1C3C64B20087A29001B74C6 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
