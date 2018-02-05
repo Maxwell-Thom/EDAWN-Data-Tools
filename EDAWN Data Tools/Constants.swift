@@ -15,5 +15,5 @@ public struct Constants {
    static let caspioPageSize = 100
    static let caspioAuthenticationBody = "grant_type=\(Constants.caspioGrantType)&client_id=\(Constants.caspioClientID)&client_secret=\(Constants.caspioClientSecret)"
    static let prospectSecretKey = "5d_yyMqoJNVTy-Xx2LYG"
-   static let hunterSecretKey = ""
+   static let hunterSecretKey = "3bd0686bea18d2c0717ff7afcd5d0fa711de2d3c"
 }

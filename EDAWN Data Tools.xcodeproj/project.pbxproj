@@ -81,11 +81,11 @@
 			children = (
 				A19622AA1FA678C00042382B /* AppDelegate.swift */,
 				A19622AC1FA678C00042382B /* ViewController.swift */,
+				A1C3C64A20087A29001B74C6 /* Constants.swift */,
 				A19622AE1FA678C00042382B /* Assets.xcassets */,
 				A19622B01FA678C00042382B /* Main.storyboard */,
 				A19622B31FA678C00042382B /* Info.plist */,
 				A19622B41FA678C00042382B /* EDAWN_Data_Tools.entitlements */,
-				A1C3C64A20087A29001B74C6 /* Constants.swift */,
 			);
 			path = "EDAWN Data Tools";
 			sourceTree = "<group>";

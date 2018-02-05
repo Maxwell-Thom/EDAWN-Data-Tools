@@ -113,17 +113,17 @@ class ViewController: NSViewController {
    }
 
    func postCaspioProspects(firstName: String, lastName: String, domainKey: String, email: String, peopleUUID: String) {
-      let json = ["People_UUID":"\(peopleUUID)",
+      let json = ["people_uuid":"\(peopleUUID)",
                   "DomainKey":"\(domainKey)",
-                  "First_name":"\(firstName)",
-                  "Last_name":"\(lastName)",
-                  "Email":"\(email)"]
+                  "first_name":"\(firstName)",
+                  "last_name":"\(lastName)",
+                  "email":"\(email)"]
 
       if let caspioAccessToken = caspioAccessToken {
          if email == "" {
             self.postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domainKey, peopleUUID: peopleUUID)
          } else {
-             Alamofire.request("https://c5ebl095.caspio.com/rest/v1/tables/\(outputTable.stringValue)/rows", method: .post, parameters: json, encoding: JSONEncoding.default, headers: ["Authorization": caspioAccessToken]).response { response in
+             Alamofire.request("https://c5ebl095.caspio.com/rest/v1/tables/Contacts/rows", method: .post, parameters: json, encoding: JSONEncoding.default, headers: ["Authorization": caspioAccessToken]).response { response in
                self.progressBar.increment(by: 1.0)
                self.requestGroup.leave()
                if response.response?.statusCode != 201 {
@@ -157,7 +157,11 @@ class ViewController: NSViewController {
    }
 
    func fetchHunterEmail(domain: String, firstName: String, lastName: String, peopleUUID: String) {
-      Alamofire.request("https://api.hunter.io/v2/email-finder?domain=/\(domain)&first_name=\(firstName)&last_name=\(lastName)&api_key=\(Constants.hunterSecretKey)").responseJSON { response in
+      guard let encodedFirstName = firstName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let encodedLastName = lastName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+         self.requestGroup.leave()
+         return
+      }
+      Alamofire.request("https://api.hunter.io/v2/email-finder?domain=/\(domain)&first_name=\(encodedFirstName)&last_name=\(encodedLastName)&api_key=\(Constants.hunterSecretKey)").responseJSON { response in
          switch response.result {
          case .success:
             if let data = response.data {
@@ -171,16 +175,17 @@ class ViewController: NSViewController {
             }
          case .failure(let error):
             self.postCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: "", peopleUUID: peopleUUID)
+            print(error)
             self.errorLabel.stringValue = "\(error)"
          }
       }
    }
 
    func postFailedEmailLookup (firstName: String, lastName: String, domainKey: String, peopleUUID: String) {
-      let json = ["Person_UUID":"\(peopleUUID)",
-                  "Domain":"\(domainKey)",
-                  "Firstname":"\(firstName)",
-                  "Lastname":"\(lastName)"]
+      let json = ["people_uuid":"\(peopleUUID)",
+                  "domain":"\(domainKey)",
+                  "first_name":"\(firstName)",
+                  "last_name":"\(lastName)"]
 
       if let caspioAccessToken = caspioAccessToken {
          Alamofire.request("https://c5ebl095.caspio.com/rest/v1/tables/FailedEmailLookup/rows", method: .post, parameters: json, encoding: JSONEncoding.default, headers: ["Authorization": caspioAccessToken]).response { response in
