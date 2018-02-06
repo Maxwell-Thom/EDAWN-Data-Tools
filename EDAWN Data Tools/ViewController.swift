@@ -21,14 +21,55 @@ class ViewController: NSViewController {
    @IBOutlet weak var runButton: NSButton!
    @IBOutlet weak var inputView: NSTextField!
    @IBOutlet weak var outputTable: NSTextField!
-   @IBOutlet weak var errorLabel: NSTextField!
-   @IBOutlet weak var inputValidationColor: NSColorWell!
-   @IBOutlet weak var outputValidationColor: NSColorWell!
+
+   @IBOutlet weak var newContacts: NSTextField!
+   @IBOutlet weak var updatedContacts: NSTextField!
+   @IBOutlet weak var failedContacts: NSTextField!
+
+   var new: Int? {
+      didSet {
+         guard let new = new else {return}
+         if new > 0 {
+            newContacts.isHidden = false
+            newContacts.stringValue = "New Contacts: \(new)"
+         } else {
+            newContacts.isHidden = true
+            newContacts.stringValue = "New Contacts: \(new)"
+         }
+      }
+   }
+
+   var updated: Int? {
+      didSet {
+         guard let updated = updated else {return}
+         if updated > 0 {
+            updatedContacts.isHidden = false
+            updatedContacts.stringValue = "Updated Contacts: \(updated)"
+         } else {
+            updatedContacts.isHidden = true
+            updatedContacts.stringValue = "Updated Contacts: \(updated)"
+         }
+      }
+   }
+
+   var failed: Int? {
+      didSet {
+         guard let failed = failed else {return}
+         if failed > 0 {
+            failedContacts.isHidden = false
+            failedContacts.stringValue = "Failed Contacts: \(failed)"
+         } else {
+            failedContacts.isHidden = true
+            failedContacts.stringValue = "Failed Contacts: \(failed)"
+         }
+      }
+   }
 
    @IBAction func runRequest(_ sender: Any) {
       self.runButton.isEnabled = false
-      errorLabel.isHidden = true
-      errorLabel.stringValue = ""
+      new = 0
+      updated = 0
+      failed = 0
       authenticateCaspio()
    }
 
@@ -40,6 +81,9 @@ class ViewController: NSViewController {
 
    override func viewDidLoad() {
       super.viewDidLoad()
+      new = 0
+      updated = 0
+      failed = 0
    }
 
    func authenticateCaspio() {
@@ -88,14 +132,11 @@ class ViewController: NSViewController {
                      } else {
                         self.runButton.isEnabled = true
                         self.progressBar.doubleValue = 0
-                        self.errorLabel.isHidden = false
                      }
 
                   } else {
                      self.runButton.isEnabled = true
                      self.progressBar.doubleValue = 0
-                     self.errorLabel.isHidden = false
-                     self.errorLabel.stringValue = "Something went wrong when trying to get Input View!"
                   }
 
                   // PROGRESS BAR
@@ -112,6 +153,47 @@ class ViewController: NSViewController {
       }
    }
 
+   func putCaspioProspects(firstName: String, lastName: String, domainKey: String, email: String, peopleUUID: String) {
+      let json = ["people_uuid":"\(peopleUUID)",
+         "DomainKey":"\(domainKey)",
+         "first_name":"\(firstName)",
+         "last_name":"\(lastName)",
+         "email":"\(email)"]
+
+      let queryString = """
+      https://c5ebl095.caspio.com/rest/v1/tables/Contacts/rows?q={"where":"people_uuid='\(peopleUUID)'"}
+      """.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+      if let caspioAccessToken = caspioAccessToken, let queryString = queryString {
+         if email == "" {
+            postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domainKey, peopleUUID: peopleUUID)
+         } else {
+            Alamofire.request(queryString, method: .put, parameters: json, encoding: JSONEncoding.prettyPrinted, headers: ["Authorization": caspioAccessToken]).responseJSON { response in
+               switch response.result {
+                  case .success:
+                     if let data = response.data {
+                        let json = JSON(data: data)
+                        if let rowsAffected =  json["RowsAffected"].int, rowsAffected > 0 {
+                           self.progressBar.increment(by: 1.0)
+                           self.requestGroup.leave()
+                           if let updated = self.updated {
+                              self.updated = updated+1
+                           }
+                        } else {
+                           self.postCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domainKey, email: email, peopleUUID: peopleUUID)
+                        }
+                     }
+                  case .failure(let error):
+                     self.progressBar.increment(by: 1.0)
+                     self.requestGroup.leave()
+                     print(error)
+                     break
+                }
+            }
+         }
+      }
+   }
+
+
    func postCaspioProspects(firstName: String, lastName: String, domainKey: String, email: String, peopleUUID: String) {
       let json = ["people_uuid":"\(peopleUUID)",
                   "DomainKey":"\(domainKey)",
@@ -126,8 +208,8 @@ class ViewController: NSViewController {
              Alamofire.request("https://c5ebl095.caspio.com/rest/v1/tables/Contacts/rows", method: .post, parameters: json, encoding: JSONEncoding.default, headers: ["Authorization": caspioAccessToken]).response { response in
                self.progressBar.increment(by: 1.0)
                self.requestGroup.leave()
-               if response.response?.statusCode != 201 {
-                  self.errorLabel.isHidden = false
+               if let new = self.new {
+                  self.new = new+1
                }
             }
          }
@@ -145,12 +227,11 @@ class ViewController: NSViewController {
                if email == "" {
                   self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
                } else {
-                  self.postCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
+                  self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
                }
             }
          case .failure(let error):
             print(error)
-            self.errorLabel.stringValue = "\(error)"
             self.requestGroup.leave()
          }
       }
@@ -170,13 +251,12 @@ class ViewController: NSViewController {
                if email == "" {
                   self.postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domain, peopleUUID: peopleUUID)
                } else {
-                  self.postCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
+                  self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
                }
             }
          case .failure(let error):
-            self.postCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: "", peopleUUID: peopleUUID)
+            self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: "", peopleUUID: peopleUUID)
             print(error)
-            self.errorLabel.stringValue = "\(error)"
          }
       }
    }
@@ -191,6 +271,9 @@ class ViewController: NSViewController {
          Alamofire.request("https://c5ebl095.caspio.com/rest/v1/tables/FailedEmailLookup/rows", method: .post, parameters: json, encoding: JSONEncoding.default, headers: ["Authorization": caspioAccessToken]).response { response in
             self.progressBar.increment(by: 1.0)
             self.requestGroup.leave()
+            if let failed = self.failed {
+               self.failed = failed+1
+            }
          }
       }
    }
@@ -203,4 +286,3 @@ extension String: ParameterEncoding {
       return request
    }
 }
-
