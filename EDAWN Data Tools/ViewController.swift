@@ -242,7 +242,7 @@ class ViewController: NSViewController {
          self.requestGroup.leave()
          return
       }
-      Alamofire.request("https://api.hunter.io/v2/email-finder?domain=/\(domain)&first_name=\(encodedFirstName)&last_name=\(encodedLastName)&api_key=\(Constants.hunterSecretKey)").responseJSON { response in
+      Alamofire.request("https://api.hunter.io/v2/email-finder?domain=\(domain)&first_name=\(encodedFirstName)&last_name=\(encodedLastName)&api_key=\(Constants.hunterSecretKey)").responseJSON { response in
          switch response.result {
          case .success:
             if let data = response.data {
