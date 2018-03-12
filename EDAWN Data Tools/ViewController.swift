@@ -26,6 +26,70 @@ class ViewController: NSViewController {
    @IBOutlet weak var updatedContacts: NSTextField!
    @IBOutlet weak var failedContacts: NSTextField!
 
+   @IBOutlet weak var apiChoiceView: NSView!
+   @IBOutlet weak var firstApiView: NSView!
+   @IBOutlet weak var verifyView: NSView!
+   @IBOutlet weak var toleranceView: NSView!
+
+   @IBOutlet weak var prospectEnabledButton: NSButton!
+   @IBOutlet weak var hunterEnabledButton: NSButton!
+
+   var prospectEnabled: Bool {
+      get {
+         if prospectEnabledButton.state == .on {
+            print("true")
+            return true
+         } else {
+            print("false")
+            return false
+         }
+      }
+   }
+
+   var hunterEnabled: Bool {
+      get {
+         if hunterEnabledButton.state == .on {
+            print("true")
+            return true
+         } else {
+            print("false")
+            return false
+         }
+      }
+   }
+
+   @IBOutlet weak var prospectRadioButton: NSButton!
+   @IBOutlet weak var hunterRadioButton: NSButton!
+
+   @IBOutlet weak var verificationYesButton: NSButton!
+   @IBOutlet weak var verificationNoButton: NSButton!
+
+   @IBOutlet weak var toleranceTextField: NSTextField!
+
+   @IBAction func emailAPIChanged(_ sender: AnyObject) {
+      if prospectEnabledButton.state == .on && hunterEnabledButton.state == .on {
+         firstApiView.isHidden = false
+         verifyView.isHidden = false
+      } else if prospectEnabledButton.state == .on {
+         firstApiView.isHidden = true
+         verifyView.isHidden = true
+      } else if hunterEnabledButton.state == .on {
+         firstApiView.isHidden = true
+         verifyView.isHidden = false
+      } else {
+         firstApiView.isHidden = true
+         verifyView.isHidden = true
+      }
+   }
+
+   @IBAction func firstRadioChanged(_ sender: AnyObject) {
+
+   }
+
+   @IBAction func verificationRadioChanged(_ sender: AnyObject) {
+
+   }
+
    var new: Int? {
       didSet {
          guard let new = new else {return}
@@ -120,7 +184,21 @@ class ViewController: NSViewController {
 
                      for i in 0...json["Result"].count-1 {
                         self.requestGroup.enter()
-                        self.fetchProspectEmail(domain: json["Result"][i]["Crunchbase_Bombora_Sum_Domain"].stringValue, firstName: json["Result"][i]["people_first_name"].stringValue, lastName: json["Result"][i]["people_last_name"].stringValue, peopleUUID: json["Result"][i]["people_uuid"].stringValue)
+
+                        let domain = json["Result"][i]["Crunchbase_Bombora_Sum_Domain"].stringValue
+                        let firstName = json["Result"][i]["people_first_name"].stringValue
+                        let lastName = json["Result"][i]["people_last_name"].stringValue
+                        let peopleUUID = json["Result"][i]["people_uuid"].stringValue
+
+                        if self.prospectEnabled  {
+                           self.fetchProspectEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                        } else if self.hunterEnabled && !self.prospectEnabled{
+                           self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                        } else {
+                           self.runButton.isEnabled = true
+                           self.progressBar.doubleValue = 0
+                           break
+                        }
                      }
 
                      //REQUEST GROUP NOTIFICATION (This only gets executed once all the above are done)
@@ -224,7 +302,7 @@ class ViewController: NSViewController {
             if let data = response.data {
                let json = JSON(data: data)
                let email = json["data"][0]["attributes"]["value"].stringValue
-               if email == "" {
+               if email == "" && self.hunterEnabled {
                   self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
                } else {
                   self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)

@@ -707,26 +707,26 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="EDAWN_Data_Tools" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="614" height="293"/>
+                        <rect key="frame" x="0.0" y="0.0" width="614" height="400"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="8qu-WT-vkd">
-                                <rect key="frame" x="68" y="154" width="215" height="36"/>
+                                <rect key="frame" x="68" y="261" width="215" height="36"/>
                                 <color key="color" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </colorWell>
                             <colorWell translatesAutoresizingMaskIntoConstraints="NO" id="6W6-wY-RXu">
-                                <rect key="frame" x="332" y="154" width="215" height="36"/>
+                                <rect key="frame" x="332" y="261" width="215" height="36"/>
                                 <color key="color" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </colorWell>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vhL-Pi-4P4">
-                                <rect key="frame" x="75" y="225" width="464" height="48"/>
+                                <rect key="frame" x="75" y="332" width="464" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Z81-ay-eqH"/>
                                 </constraints>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="EDAWN Banner" id="mrT-ni-bpX"/>
                             </imageView>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JaW-VK-Pdg">
-                                <rect key="frame" x="75" y="161" width="200" height="22"/>
+                                <rect key="frame" x="75" y="268" width="200" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="BV8-sT-sIQ"/>
                                 </constraints>
@@ -737,7 +737,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KEJ-nh-eu8">
-                                <rect key="frame" x="339" y="161" width="200" height="22"/>
+                                <rect key="frame" x="339" y="268" width="200" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="Contacts" drawsBackground="YES" id="gDQ-fI-8F2">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -745,7 +745,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gyh-m8-hVn">
-                                <rect key="frame" x="116" y="193" width="118" height="17"/>
+                                <rect key="frame" x="116" y="300" width="118" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="114" id="lcV-Ep-m8A"/>
                                 </constraints>
@@ -756,7 +756,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PzQ-rf-vEI">
-                                <rect key="frame" x="377" y="193" width="124" height="17"/>
+                                <rect key="frame" x="377" y="300" width="124" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="k0X-jp-Wps"/>
                                 </constraints>
@@ -767,7 +767,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ILk-TN-jEy">
-                                <rect key="frame" x="63" y="72" width="129" height="17"/>
+                                <rect key="frame" x="63" y="61" width="129" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="TfA-ka-e8B"/>
                                 </constraints>
@@ -778,7 +778,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6SN-Hc-r5o">
-                                <rect key="frame" x="417" y="72" width="135" height="17"/>
+                                <rect key="frame" x="417" y="61" width="135" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="131" id="PUj-Uy-WUt"/>
                                 </constraints>
@@ -789,7 +789,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dAq-nV-ZRN">
-                                <rect key="frame" x="228" y="72" width="153" height="17"/>
+                                <rect key="frame" x="228" y="61" width="153" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="149" id="5tF-6F-MFa"/>
                                 </constraints>
@@ -815,6 +815,153 @@
                             <progressIndicator wantsLayer="YES" maxValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="lZy-JR-RHV">
                                 <rect key="frame" x="75" y="11" width="464" height="20"/>
                             </progressIndicator>
+                            <customView ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vJo-Kq-F3o">
+                                <rect key="frame" x="184" y="216" width="246" height="37"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tej-gr-Nd5">
+                                        <rect key="frame" x="18" y="20" width="216" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Which APIs Would you like to use?" id="S0s-jV-M7q">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D6R-Jo-xiK">
+                                        <rect key="frame" x="127" y="-1" width="64" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="check" title="Hunter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="MFA-O2-09m">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="emailAPIChanged:" target="XfG-lQ-9wD" id="kWM-oz-wur"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G5T-LP-HR7">
+                                        <rect key="frame" x="46" y="-1" width="77" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="check" title="Prospect" bezelStyle="regularSquare" imagePosition="right" alignment="right" inset="2" id="eib-Ey-bhS">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="emailAPIChanged:" target="XfG-lQ-9wD" id="buP-t7-nlk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="JBN-4l-Fwq"/>
+                                    <constraint firstAttribute="width" constant="246" id="n7v-qv-znK"/>
+                                </constraints>
+                            </customView>
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KNg-QM-ztF">
+                                <rect key="frame" x="184" y="109" width="246" height="57"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1ei-nM-BoQ">
+                                        <rect key="frame" x="46" y="-1" width="77" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="Yes" bezelStyle="regularSquare" imagePosition="right" alignment="right" inset="2" id="qB2-Zz-l77">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="verificationRadioChanged:" target="XfG-lQ-9wD" id="60f-8z-xcs"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-7j-7tB">
+                                        <rect key="frame" x="21" y="20" width="205" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Would you like to verify Hunter emails?" id="xha-GO-tnU">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="04k-Kz-XIZ">
+                                        <rect key="frame" x="128" y="-1" width="64" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="No" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="98J-V1-cKx">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="verificationRadioChanged:" target="XfG-lQ-9wD" id="VlL-kN-qei"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="246" id="ZcB-os-ejT"/>
+                                    <constraint firstAttribute="height" constant="57" id="ju0-HI-q6W"/>
+                                </constraints>
+                            </customView>
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1aE-QH-opv">
+                                <rect key="frame" x="184" y="174" width="246" height="37"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dO5-US-eHx">
+                                        <rect key="frame" x="-2" y="19" width="250" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Which API would you like to use first?" id="cYy-IH-bwq">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sP1-qq-Jc3">
+                                        <rect key="frame" x="46" y="-1" width="77" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="Prospect" bezelStyle="regularSquare" imagePosition="right" alignment="right" inset="2" id="qxG-el-sbh">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="firstRadioChanged:" target="XfG-lQ-9wD" id="auk-V9-Xeo"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Jw-Uv-STt">
+                                        <rect key="frame" x="128" y="-1" width="64" height="19"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="Hunter" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="r7v-FW-W7O">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="firstRadioChanged:" target="XfG-lQ-9wD" id="ImO-g5-D8m"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="246" id="BQi-r0-L0P"/>
+                                    <constraint firstAttribute="height" constant="37" id="vIu-rk-oJP"/>
+                                </constraints>
+                            </customView>
+                            <customView hidden="YES" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJl-Gw-BTZ">
+                                <rect key="frame" x="184" y="83" width="246" height="18"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vRr-A3-A3G">
+                                        <rect key="frame" x="18" y="1" width="157" height="17"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Verification Tolerance?" id="jMI-bc-cr0">
+                                            <font key="font" metaFont="systemBold"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JB3-wX-Goz">
+                                        <rect key="frame" x="181" y="1" width="45" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="90" drawsBackground="YES" id="x5z-RG-0aY">
+                                            <font key="font" metaFont="miniSystem"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="BG8-Mk-1ZB"/>
+                                    <constraint firstAttribute="width" constant="246" id="Gu8-qX-W9w"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="6W6-wY-RXu" firstAttribute="leading" secondItem="JaW-VK-Pdg" secondAttribute="trailing" constant="57" id="0Td-sE-FOz"/>
@@ -835,7 +982,7 @@
                             <constraint firstItem="6SN-Hc-r5o" firstAttribute="leading" secondItem="dAq-nV-ZRN" secondAttribute="trailing" constant="40" id="XA9-5M-Z82"/>
                             <constraint firstItem="KEJ-nh-eu8" firstAttribute="leading" secondItem="8qu-WT-vkd" secondAttribute="trailing" constant="56" id="XBh-RV-Aur"/>
                             <constraint firstItem="8qu-WT-vkd" firstAttribute="centerY" secondItem="JaW-VK-Pdg" secondAttribute="centerY" id="YV3-ef-eFM"/>
-                            <constraint firstItem="JxS-Tb-G1Z" firstAttribute="top" secondItem="dAq-nV-ZRN" secondAttribute="bottom" constant="17" id="ZCB-s3-Xjv"/>
+                            <constraint firstItem="JxS-Tb-G1Z" firstAttribute="top" secondItem="dAq-nV-ZRN" secondAttribute="bottom" constant="6" id="ZCB-s3-Xjv"/>
                             <constraint firstItem="JxS-Tb-G1Z" firstAttribute="centerX" secondItem="lZy-JR-RHV" secondAttribute="centerX" id="aMO-8v-7qY"/>
                             <constraint firstItem="ILk-TN-jEy" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="65" id="dWH-mx-fDb"/>
                             <constraint firstItem="8qu-WT-vkd" firstAttribute="top" secondItem="6W6-wY-RXu" secondAttribute="top" id="db2-FI-SjE"/>
@@ -852,20 +999,34 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="apiChoiceView" destination="vJo-Kq-F3o" id="PgG-xo-1GQ"/>
                         <outlet property="failedContacts" destination="6SN-Hc-r5o" id="GKL-LZ-78X"/>
+                        <outlet property="firstApiView" destination="1aE-QH-opv" id="9ev-kf-wPH"/>
+                        <outlet property="firstEmailApiTitle" destination="dO5-US-eHx" id="CaW-8a-4ee"/>
+                        <outlet property="hunterEnabledButton" destination="D6R-Jo-xiK" id="HoB-Lw-UeT"/>
+                        <outlet property="hunterRadioButton" destination="6Jw-Uv-STt" id="8Ux-hd-wO6"/>
                         <outlet property="inputValidationColor" destination="8qu-WT-vkd" id="HS8-yg-1PL"/>
                         <outlet property="inputView" destination="JaW-VK-Pdg" id="mfq-7n-Du7"/>
                         <outlet property="newContacts" destination="ILk-TN-jEy" id="kPp-ED-sbw"/>
                         <outlet property="outputTable" destination="KEJ-nh-eu8" id="CkR-7i-W2y"/>
                         <outlet property="outputValidationColor" destination="6W6-wY-RXu" id="JwQ-sI-9ZE"/>
                         <outlet property="progressBar" destination="lZy-JR-RHV" id="tFh-2g-lpa"/>
+                        <outlet property="prospectEnabled" destination="G5T-LP-HR7" id="bcn-8M-Ige"/>
+                        <outlet property="prospectEnabledButton" destination="G5T-LP-HR7" id="SPa-aN-CV5"/>
+                        <outlet property="prospectRadioButton" destination="sP1-qq-Jc3" id="jFz-bz-SXJ"/>
                         <outlet property="runButton" destination="JxS-Tb-G1Z" id="WMa-xu-oYA"/>
+                        <outlet property="toleranceTextField" destination="JB3-wX-Goz" id="nfx-99-mOq"/>
+                        <outlet property="toleranceView" destination="XJl-Gw-BTZ" id="f9m-7O-dpQ"/>
                         <outlet property="updatedContacts" destination="dAq-nV-ZRN" id="gsP-Kj-tcv"/>
+                        <outlet property="verificationNoButton" destination="04k-Kz-XIZ" id="6AD-XC-lnz"/>
+                        <outlet property="verificationTitle" destination="yfb-7j-7tB" id="omV-Gm-629"/>
+                        <outlet property="verificationYesButton" destination="1ei-nM-BoQ" id="Zoy-zc-Nq7"/>
+                        <outlet property="verifyView" destination="KNg-QM-ztF" id="pfR-bK-qgv"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="780.5"/>
+            <point key="canvasLocation" x="75" y="780"/>
         </scene>
     </scenes>
     <resources>
