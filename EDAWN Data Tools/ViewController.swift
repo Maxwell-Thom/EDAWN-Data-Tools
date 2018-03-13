@@ -34,30 +34,6 @@ class ViewController: NSViewController {
    @IBOutlet weak var prospectEnabledButton: NSButton!
    @IBOutlet weak var hunterEnabledButton: NSButton!
 
-   var prospectEnabled: Bool {
-      get {
-         if prospectEnabledButton.state == .on {
-            print("true")
-            return true
-         } else {
-            print("false")
-            return false
-         }
-      }
-   }
-
-   var hunterEnabled: Bool {
-      get {
-         if hunterEnabledButton.state == .on {
-            print("true")
-            return true
-         } else {
-            print("false")
-            return false
-         }
-      }
-   }
-
    @IBOutlet weak var prospectRadioButton: NSButton!
    @IBOutlet weak var hunterRadioButton: NSButton!
 
@@ -66,28 +42,37 @@ class ViewController: NSViewController {
 
    @IBOutlet weak var toleranceTextField: NSTextField!
 
-   @IBAction func emailAPIChanged(_ sender: AnyObject) {
-      if prospectEnabledButton.state == .on && hunterEnabledButton.state == .on {
-         firstApiView.isHidden = false
-         verifyView.isHidden = false
-      } else if prospectEnabledButton.state == .on {
-         firstApiView.isHidden = true
-         verifyView.isHidden = true
-      } else if hunterEnabledButton.state == .on {
-         firstApiView.isHidden = true
-         verifyView.isHidden = false
-      } else {
-         firstApiView.isHidden = true
-         verifyView.isHidden = true
+   var prospectFirst = true
+   var verify = true
+
+   var tolerance: Int {
+      get {
+         if verificationYesButton.state == .on {
+            return Int(toleranceTextField.intValue)
+         } else {
+            return 0
+         }
       }
    }
 
-   @IBAction func firstRadioChanged(_ sender: AnyObject) {
-
+   var prospectEnabled: Bool {
+      get {
+         if prospectEnabledButton.state == .on {
+            return true
+         } else {
+            return false
+         }
+      }
    }
 
-   @IBAction func verificationRadioChanged(_ sender: AnyObject) {
-
+   var hunterEnabled: Bool {
+      get {
+         if hunterEnabledButton.state == .on {
+            return true
+         } else {
+            return false
+         }
+      }
    }
 
    var new: Int? {
@@ -129,8 +114,41 @@ class ViewController: NSViewController {
       }
    }
 
+   @IBAction func emailAPIChanged(_ sender: AnyObject) {
+      if prospectEnabledButton.state == .on && hunterEnabledButton.state == .on {
+         firstApiView.isHidden = false
+         verifyView.isHidden = false
+      } else if prospectEnabledButton.state == .on {
+         firstApiView.isHidden = true
+         verifyView.isHidden = true
+      } else if hunterEnabledButton.state == .on {
+         firstApiView.isHidden = true
+         verifyView.isHidden = false
+      } else {
+         firstApiView.isHidden = true
+         verifyView.isHidden = true
+      }
+   }
+
+   @IBAction func firstRadioChanged(_ sender: AnyObject) {
+      if prospectRadioButton.state == .on {
+         prospectFirst = true
+      } else if prospectRadioButton.state == .off && hunterRadioButton.state == .off{
+         prospectFirst = true
+      }  else {
+         prospectFirst = false
+      }
+      print("prospectFirst: ", prospectFirst)
+   }
+
+   @IBAction func verificationRadioChanged(_ sender: AnyObject) {
+      verify = verificationYesButton.state == .on
+      toleranceView.isHidden = !verify
+      print("verify: ", verify)
+   }
+
    @IBAction func runRequest(_ sender: Any) {
-      self.runButton.isEnabled = false
+      disableUI()
       new = 0
       updated = 0
       failed = 0
@@ -150,6 +168,28 @@ class ViewController: NSViewController {
       failed = 0
    }
 
+   func disableUI() {
+      runButton.isEnabled = false
+      prospectEnabledButton.isEnabled = false
+      hunterEnabledButton.isEnabled = false
+      prospectRadioButton.isEnabled = false
+      hunterRadioButton.isEnabled = false
+      verificationYesButton.isEnabled = false
+      verificationNoButton.isEnabled = false
+      toleranceTextField.isEnabled = false
+   }
+
+   func enableUI() {
+      runButton.isEnabled = true
+      prospectEnabledButton.isEnabled = true
+      hunterEnabledButton.isEnabled = true
+      prospectRadioButton.isEnabled = true
+      hunterRadioButton.isEnabled = true
+      verificationYesButton.isEnabled = true
+      verificationNoButton.isEnabled = true
+      toleranceTextField.isEnabled = true
+   }
+
    func authenticateCaspio() {
       Alamofire.request( "https://c5ebl095.caspio.com/oauth/token", method: .post, parameters: [:], encoding: Constants.caspioAuthenticationBody, headers: [:]).responseJSON { response in
             switch response.result {
@@ -160,7 +200,7 @@ class ViewController: NSViewController {
                   self.fetchCaspioProspects()
                }
             case .failure(let error):
-               self.runButton.isEnabled = true
+               self.enableUI()
                self.progressBar.doubleValue = 0
                print(error)
             }
@@ -190,12 +230,21 @@ class ViewController: NSViewController {
                         let lastName = json["Result"][i]["people_last_name"].stringValue
                         let peopleUUID = json["Result"][i]["people_uuid"].stringValue
 
-                        if self.prospectEnabled  {
-                           self.fetchProspectEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
-                        } else if self.hunterEnabled && !self.prospectEnabled{
-                           self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+
+                        if self.prospectEnabled && self.hunterEnabled {
+                           if self.prospectFirst {
+                              self.fetchProspectEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                           } else {
+                              self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                           }
+                        } else if self.prospectEnabled || self.hunterEnabled {
+                           if self.prospectEnabled {
+                              self.fetchProspectEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                           } else {
+                              self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                           }
                         } else {
-                           self.runButton.isEnabled = true
+                           self.enableUI()
                            self.progressBar.doubleValue = 0
                            break
                         }
@@ -208,12 +257,12 @@ class ViewController: NSViewController {
                            print("Current Page: \(self.caspioPage)")
                         })
                      } else {
-                        self.runButton.isEnabled = true
+                        self.enableUI()
                         self.progressBar.doubleValue = 0
                      }
 
                   } else {
-                     self.runButton.isEnabled = true
+                     self.enableUI()
                      self.progressBar.doubleValue = 0
                   }
 
@@ -223,7 +272,7 @@ class ViewController: NSViewController {
                   self.progressBar.doubleValue = 0
                }
             case .failure(let error):
-               self.runButton.isEnabled = true
+               self.enableUI()
                self.progressBar.doubleValue = 0
                print(error)
             }
@@ -302,8 +351,12 @@ class ViewController: NSViewController {
             if let data = response.data {
                let json = JSON(data: data)
                let email = json["data"][0]["attributes"]["value"].stringValue
-               if email == "" && self.hunterEnabled {
-                  self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+               if email == "" {
+                  if self.hunterEnabled && self.prospectFirst {
+                     self.fetchHunterEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                  } else {
+                     self.postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domain, peopleUUID: peopleUUID)
+                  }
                } else {
                   self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
                }
@@ -326,10 +379,19 @@ class ViewController: NSViewController {
             if let data = response.data {
                let json = JSON(data: data)
                let email = json["data"]["email"].stringValue
+               let verificationScore = json["data"]["score"].intValue
                if email == "" {
-                  self.postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domain, peopleUUID: peopleUUID)
+                  if self.prospectEnabled && !self.prospectFirst {
+                     self.fetchProspectEmail(domain: domain, firstName: firstName, lastName: lastName, peopleUUID: peopleUUID)
+                  } else {
+                     self.postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domain, peopleUUID: peopleUUID)
+                  }
                } else {
-                  self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
+                  if verificationScore >= self.tolerance {
+                     self.putCaspioProspects(firstName: firstName, lastName: lastName, domainKey: domain, email: email, peopleUUID: peopleUUID)
+                  } else {
+                     self.postFailedEmailLookup(firstName: firstName, lastName: lastName, domainKey: domain, peopleUUID: peopleUUID)
+                  }
                }
             }
          case .failure(let error):
